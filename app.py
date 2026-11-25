@@ -1,8 +1,15 @@
 import streamlit as st
+import pandas as pd
 
-st.title("Mon premier site Streamlit")
+st.title("LeanCure Dashboard")
 
-nom = st.text_input("Votre prénom")
+fichier = st.file_uploader(
+    "Importer un fichier Excel",
+    type=["xlsx"]
+)
 
-if nom:
-    st.success(f"Bonjour {nom} !")
+if fichier:
+    df = pd.read_excel(fichier)
+
+    st.success("Fichier chargé")
+    st.dataframe(df.head())
